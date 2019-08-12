@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+</head>
+<link rel="stylesheet" href="layui/css/layui.css">
+<body>
+<form action="/create" style="width: 400px">
+    <div class="layui-form-item">
+        <label class="layui-form-label">源语言</label>
+        <div class="layui-input-block">
+            <input type="text" name="sourcelanguage" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">目的语言</label>
+        <div class="layui-input-block">
+            <input type="text" name="destinationlanguage" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">创建者</label>
+        <div class="layui-input-block">
+            <input type="text" name="creator" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">注释</label>
+        <div class="layui-input-block">
+            <input type="text" name="notes" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">领域</label>
+        <div class="layui-input-block">
+            <input type="text" name="industry" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">语言</label>
+        <div class="layui-input-block">
+            <input type="text" name="language" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<hr class="layui-bg-orange">
+<form action="/sreach" style="width: 400px" id="sd" class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入</label>
+        <div class="layui-input-block">
+            <input type="text" name="input" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <input name="page" type="hidden" value=0>
+    <input name="size" type="hidden" value=5>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择框</label>
+        <div class="layui-input-block">
+            <select name="language" lay-verify="required">
+                <option value="chinese">中文</option>
+                <option value="english">英文</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<hr class="layui-bg-orange">
+<div class="layui-input-block">
+    <button type="button" class="layui-btn" id="test1">
+        <i class="layui-icon">&#xe67c;</i>上传txt
+    </button>
+</div>
+<br>
+<div class="layui-input-block">
+    <button type="button" class="layui-btn">
+        <i class="layui-icon">&#xe67c;</i><a href="http://127.0.0.1:8080/api/file/out.txt" download="out.txt">下载</a>
+    </button>
+</div>
+<hr class="layui-bg-orange">
+
+<form action="/advancedquery" class="layui-form" style="width: 600px">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择框</label>
+        <div class="layui-input-block">
+            <select name="language" lay-verify="required">
+                <option value="中文">中文</option>
+                <option value="英文">英文</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择行业</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="industry" title="金融" value="金融">
+            <input type="checkbox" name="industry" title="医疗" value="医疗">
+            <input type="checkbox" name="industry" title="电子" value="电子">
+            <input type="checkbox" name="industry" title="服务" value="服务">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择日期</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="test2" name="date">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+<script src="layui/layui.js"></script>
+<script>
+    layui.use('form', function () {
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+
+        //……
+
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        form.render({
+                elem: '#sd'
+            }
+        );
+    });
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#test2' //指定元素
+            , type: 'datetime'
+            , range: true
+        });
+    })
+
+
+    layui.use('upload', function () {
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1' //绑定元素
+            ,
+            url: '/getfile' //上传接口
+            ,
+            data: {'language': 'chinese'},
+            accept: 'file',
+            done: function (res) {
+                //上传完毕回调
+            },
+            error: function () {
+                //请求异常回调
+            }
+        });
+    });
+</script>
+</html>
